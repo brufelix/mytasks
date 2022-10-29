@@ -1,6 +1,11 @@
 import React from 'react';
-import { Home } from './src/pages/Home';
+import { TaskProvider } from './src/context';
+import { Home } from './src/pages';
 
-const App = () => <Home />
+const App = () => (
+  <TaskProvider >
+    <Home />
+  </TaskProvider>
+)
 
 export default App

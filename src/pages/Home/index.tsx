@@ -7,19 +7,14 @@ import {
   TouchableOpacity,
   Platform,
   StyleSheet,
-  ScrollView,
   FlatList
 } from 'react-native';
 import { TaskItem } from '../../components';
-
-interface ITask {
-  id: string,
-  title: string
-}
+import { useTasks } from '../../hooks';
 
 const Home = () => {
   const [newTask, setNewTask] = useState('')
-  const [listTasks, setListTasks] = useState<ITask[]>([])
+  const { tasks, setTasks } = useTasks()
 
   const handleAddNewTask = () => {
     const task = {
@@ -28,7 +23,7 @@ const Home = () => {
     }
 
     setNewTask('')
-    setListTasks([...listTasks, task])
+    setTasks([...tasks, task])
   }
 
   return (
@@ -59,7 +54,7 @@ const Home = () => {
           Minhas Tarefas
         </Text>
         <FlatList
-          data={listTasks}
+          data={tasks}
           keyExtractor={({ id }) => id}
           renderItem={({ item: { id, title } }) => <TaskItem id={id} title={title} />}
         />
